@@ -16,7 +16,7 @@ class SearchTest extends TestCase
         $this->mysqli->close();
     }
 
-    public function testSearchProductsWithKeyword()
+    public function test_TK_001()
     {
         // Giả sử trong CSDL đã có sản phẩm tên 'Dưa lưới'
         $result = searchProducts($this->mysqli, 'Dưa lưới');
@@ -25,7 +25,7 @@ class SearchTest extends TestCase
         $this->assertStringContainsString('Dưa lưới', $result['title']);
     }
 
-    public function testSearchProductsNoResults()
+    public function test_TK_002()
     {
         $result = searchProducts($this->mysqli, 'Không Tồn Tại');
         // Kiểm tra không có sản phẩm nào trả về

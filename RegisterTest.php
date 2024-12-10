@@ -8,22 +8,20 @@ class RegisterTest extends TestCase
 
     protected function setUp(): void
     {
-        // Thiết lập kết nối cơ sở dữ liệu giả lập hoặc mock cho các bài test
         $this->mysqli = new mysqli("localhost", "root", "", "asm_php1");
-        $_SESSION = []; // Xóa dữ liệu session trước mỗi test
+        $_SESSION = [];
     }
 
     // Testcase 1: Kiểm tra đăng ký rỗng
-    public function testRegister001()
+    public function test_DK_001()
     {
         $result = registerUser($this->mysqli, "", "", "", "", "");
         $this->assertEquals("Vui lòng nhập đầy đủ thông tin đăng ký", $result);
     }
 
     // Testcase 2: Kiểm tra đăng ký với Email trùng
-    public function testRegister002()
+    public function test_DK_002()
     {
-        // Giả lập một email đã tồn tại trong cơ sở dữ liệu
         $email = "tester999@gmail.com";
         $this->mysqli->query("INSERT INTO quanli_user (user_name, user_code, user_email, user_phone, user_address, user_password) 
             VALUES ('Test User', 0, '$email', '123456789', 'Test Address', 'password')");
@@ -36,9 +34,8 @@ class RegisterTest extends TestCase
     }
 
     // Testcase 3: Kiểm tra đăng ký thành công
-    public function testRegister003()
+    public function test_DK_003()
     {
-        // Đăng ký với email mới
         $result = registerUser($this->mysqli, "New User", "tester998@gmail.com", "0987654321", "New Address", "newpassword");
         $this->assertEquals("Đăng ký thành công. Mời bạn đăng nhập.", $result);
 

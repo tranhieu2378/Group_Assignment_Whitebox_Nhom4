@@ -12,7 +12,7 @@ class DetailTest extends TestCase
     }
 
     // Test khi ID rỗng
-    public function testGetProductDetailsEmptyId()
+    public function test_CT_001()
     {
         $result = getProductDetails($this->mysqli, '');
         $this->assertFalse($result);
@@ -20,7 +20,7 @@ class DetailTest extends TestCase
 
 
     // Test khi ID hợp lệ và có sản phẩm
-    public function testGetProductDetailsWithValidId()
+    public function test_CT_002()
     {
         $result = getProductDetails($this->mysqli, 1);
 

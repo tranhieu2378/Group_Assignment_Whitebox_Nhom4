@@ -14,7 +14,7 @@ class CartTest extends TestCase
     }
 
     // Testcase 1: Thêm mới một sản phẩm vào giỏ hàng
-    public function testAddToCart_NewProduct() {
+    public function test_TGH_001() {
         addToCart("Dưa lưới Đài Loan", 6, 120000, "images/traicay6.jpg", 2);
 
         $this->assertArrayHasKey(6, $_SESSION['cart']);
@@ -23,7 +23,7 @@ class CartTest extends TestCase
     }
 
     // Testcase 2: Thêm số lượng sản phẩm đã tồn tại trong giỏ hàng
-    public function testAddToCart_ExistingProduct() {
+    public function test_TGH_002() {
         $_SESSION['cart'][6] = [
             'tensanpham' => "Dưa lưới Đài Loan",
             'gia' => 120000,
@@ -36,7 +36,7 @@ class CartTest extends TestCase
     }
 
     // Testcase 3: Cập nhật số lượng sản phẩm trong giỏ hàng
-    public function testUpdateQuantityInCart() {
+    public function test_UQ_001() {
         $_SESSION['cart'] = [
             1 => ['tensanpham' => 'Cherry Mỹ', 'soluong' => 2],
         ];
@@ -46,7 +46,7 @@ class CartTest extends TestCase
     }
 
     // Testcase 4: Xóa sản phẩm khi số lượng bằng 0
-    public function testUpdateQuantityZero() {
+    public function test_UQ_002() {
         $_SESSION['cart'] = [
             2 => ['tensanpham' => 'Nho Hàn Quốc', 'soluong' => 5]
         ];
@@ -56,7 +56,7 @@ class CartTest extends TestCase
     }
 
     // Testcase 5: Kiểm tra giỏ hàng trống hoặc dữ liệu trống
-    public function testUpdateEmptyCart() {
+    public function test_UQ_003() {
         $_SESSION['cart'] = [];
         $productIds = [];
         $quantities = [];
@@ -67,7 +67,7 @@ class CartTest extends TestCase
     }
 
     // Testcase 6: Xóa sản phẩm thành công
-    public function testRemoveFromCart_Success() {
+    public function test_RC_001() {
         $_SESSION['cart'][1] = ['tensanpham' => 'Cherry Mỹ', 'soluong' => 2];
         $result = removeFromCart(1);
 
@@ -76,14 +76,14 @@ class CartTest extends TestCase
     }
 
     // Testcase 7: Xóa sản phẩm không tồn tại
-    public function testRemoveFromCart_ProductNotExists() {
+    public function test_RC_002() {
         $result = removeFromCart(3);
 
         $this->assertEquals("Sản phẩm không tồn tại trong giỏ hàng", $result);
     }
 
     // Testcase 8: Tính tổng số tiền sản phẩm
-    public function testCalculateTotalMoney() {
+    public function test_TM_001() {
         $this->assertEquals(20000, calculateTotalMoney(2, 10000));
         $this->assertEquals(0, calculateTotalMoney(0, 10000));
         $this->assertEquals(50000, calculateTotalMoney(5, 10000));

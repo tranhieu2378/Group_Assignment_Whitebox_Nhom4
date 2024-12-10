@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 require_once __DIR__ . '/../frontend/function/function_logout.php';
-
+// ./vendor/bin/phpunit tests/LogoutTest.php
 class LogoutTest extends TestCase
 {
     // Khởi tạo session giả để thử nghiệm
@@ -17,7 +17,7 @@ class LogoutTest extends TestCase
     }
 
     // Test case cho hàm logoutUser
-    public function testLogoutUser()
+    public function test_DX_001()
     {
         // Gọi hàm logoutUser
         $result = logoutUser();

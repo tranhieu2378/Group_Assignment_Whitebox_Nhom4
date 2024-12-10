@@ -18,35 +18,35 @@ class ChangePwdTest extends TestCase
      }
 
      // Kiểm tra trường hợp mật khẩu cũ sai
-     public function testMatKhauCuSai()
+     public function test_UP_001()
      {
           $result = doiMatKhau($this->mysqli, $this->tendangnhap, 'wrongpassword', 'newpassword1', 'newpassword1'); 
           $this->assertStringContainsString("Mật khẩu cũ sai", $result['errors']);
      }
 
      // Kiểm tra trường hợp mật khẩu mới giống mật khẩu cũ
-     public function testMatKhauMoiGiongMatKhauCu()
+     public function test_UP_002()
      {
           $result = doiMatKhau($this->mysqli, $this->tendangnhap, $this->matkhaucu, '1234567', '1234567');   
           $this->assertStringContainsString("Mật khẩu mới không được giống mật khẩu cũ", $result['errors']);
      }
 
      // Kiểm tra trường hợp mật khẩu mới quá ngắn
-     public function testMatKhauMoiQuaNgan()
+     public function test_UP_003()
      {
           $result = doiMatKhau($this->mysqli, $this->tendangnhap, $this->matkhaucu, '12345', '12345');       
           $this->assertStringContainsString("Mật khẩu mới phải trên 6 ký tự", $result['errors']);
      }
 
      // Kiểm tra trường hợp mật khẩu mới và xác nhận mật khẩu không khớp
-     public function testMatKhauMoiKhongKhop()
+     public function test_UP_004()
      {
           $result = doiMatKhau($this->mysqli, $this->tendangnhap, $this->matkhaucu, 'newpassword1', 'newpassword2');
           $this->assertStringContainsString("Nhập lại mật khẩu không giống nhau", $result['errors']);
      }
 
      // Kiểm tra trường hợp mật khẩu thay đổi thành công
-     public function testDoiMatKhauThanhCong()
+     public function test_UP_005()
      {    
           $result = doiMatKhau($this->mysqli, $this->tendangnhap, $this->matkhaucu, 'newpassword123', 'newpassword123');    
           $this->assertStringContainsString("Thay đổi mật khẩu thành công", $result['thongBao']);    
